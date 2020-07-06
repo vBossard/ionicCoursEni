@@ -1,20 +1,86 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Blank
+      Open Trivia
     </ion-title>
   </ion-toolbar>
 </ion-header>
+<ion-content *ngIf="showForm" [fullscreen]="true">
+  <form  [formGroup]="formInfo" (ngSubmit)="validateForm()">
+    <!-- Pseudo -->
+    <div id="container">
+      <div class="pseudo-div">
+        <h3>Votre pseudo</h3>
+        <ion-input formControlName="pseudo" placeholder="Entrer votre pseudo"></ion-input>
+      </div>
+      <!-- Partie choix de la difficulté -->
+      <div class="difficulty-list">
+        <ion-list>
+          <ion-list-header>
+            <ion-label>
+              <h3>Choisissez la difficulté</h3>
+            </ion-label>
+          </ion-list-header>
+        
+          <ion-item>
+            <ion-select formControlName="difficulty" multiple="false"  okText="Valider" cancelText="Annuler">
+              <ion-select-option  *ngFor="let difficulty of difficultiesList">{{difficulty | titlecase }}</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+      </div>
+      <!-- Mémorisation des infos -->
+      <div>
+        <p>Mémoriser mes informations</p>
+        <ion-checkbox formControlName="rememberMe" color="light"></ion-checkbox>
+      </div>
+      <div>
+        <ion-button type="submit" [disabled]="!formInfo.valid" shape="round">Commencer</ion-button>
+      </div>
+      <!-- Div des erreurs -->
+      <div>
+        <p class="error ion-padding" *ngIf="errorControl.pseudo.errors?.required">
+          Choisissez un pseudo
+        </p>
+        <p class="error ion-padding" *ngIf="errorControl.pseudo.errors?.minlength">
+          Le pseudo doit faire au moins 3 caractères
+        </p>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+        <p class="error ion-padding" *ngIf="errorControl.difficulty.errors?.required">
+          Choisissez un niveau de dificulté
+        </p>
+      </div>
+    </div>
+  </form>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+  <!-- ======================== Partie Question ======================== -->
+</ion-content>
+
+<ion-content *ngIf="!showForm" [fullscreen]="true">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Bienvenue {{user.pseudo | titlecase}}</ion-card-title>
+      <ion-card-subtitle>Niveau : {{user.level}}</ion-card-subtitle>
+    </ion-card-header>
+  
+    <ion-card-content>
+      <h3>Question 1</h3>
+      <h4>Zinédine ?</h4>
+      <ul>
+        <li>A : Ziboom</li>
+        <li>B : Zibram</li>
+        <li>C : Zidnae</li>
+        <li>D : Zidane</li>
+      </ul>
+      <div *ngIf="!ansmwerSubmitted">
+        <ion-button (click)="submitAnswer('Ziboom')" shape="round">Reponse A</ion-button>
+        <ion-button (click)="submitAnswer('Ziboom')" shape="round">Reponse B</ion-button>
+        <ion-button (click)="submitAnswer('Ziboom')" shape="round">Reponse C</ion-button>
+        <ion-button (click)="submitAnswer('Ziboom')" shape="round">Reponse D</ion-button>
+      </div>
+      <div>
+        <ion-button *ngIf="ansmwerSubmitted" shape="round">Question suivante</ion-button>
+      </div>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

@@ -7,14 +7,16 @@ import { HomePage } from './home.page';
 import { HomePageRoutingModule } from './home-routing.module';
 
 
+
+// Particularité Ionic
+// On peut mettre des composants dans un page mais pas pas de page dans un composant
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
     HomePageRoutingModule,
-    FormsModule, 
-    ReactiveFormsModule
+    ReactiveFormsModule,
     
   ],
   declarations: [HomePage]

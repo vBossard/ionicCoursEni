@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -13,22 +15,18 @@ export class HomePage implements OnInit {
   // Pour afficher ou non le formulaire
   showForm:boolean = true;
   // Pour vérifier si une réponse a été envoyée
-  ansmwerSubmitted:boolean = false;
+  
+  user:User;
 
-  //Utilisateur
-  user= {
-    pseudo:"",
-    score:0,
-    level:"",
-    remember:false,
+
+  constructor(private formBuilder: FormBuilder, private router:Router) {
   }
 
-  constructor(private formBuilder: FormBuilder) {
-  }
+
   ngOnInit(){
     this.createForm();
   }
-
+  
   /**
    * Création du formulaire
    */
@@ -36,7 +34,7 @@ export class HomePage implements OnInit {
     this.formInfo = this.formBuilder.group({
       pseudo:['',[Validators.required, Validators.minLength(3)]],
       difficulty:['',[Validators.required]],
-      rememberMe:['']
+      rememberMe:[true]
     })
   }
 
@@ -44,14 +42,11 @@ export class HomePage implements OnInit {
    * Validation du formulaire
   */
    validateForm(){
-    if(this.formInfo.valid){
-      this.showForm = false;
-      this.user.pseudo = this.formInfo.value.pseudo;
-      this.user.score = 0;
-      this.user.level = this.formInfo.value.difficulty;
-      this.user.remember = this.formInfo.value.rememberMe;
+      if(this.formInfo.valid){
+        
+        this.user =this.formInfo.value;
+        this.redirectToQuestion();
     }
-    
   }
 
   /**
@@ -61,11 +56,13 @@ export class HomePage implements OnInit {
     return this.formInfo.controls;
   }
 
-  /**
-   * Vérification de la réponse
-   */
-  submitAnswer(reponse){
-    this.ansmwerSubmitted =true
-  }
 
+  /**
+   * Redirige vers les questions
+   */
+  redirectToQuestion(){
+    this.router.navigate(['question'], {queryParams : this.user});
+
+  }
+  
 }

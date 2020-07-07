@@ -1,3 +1,4 @@
+
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
@@ -5,7 +6,8 @@
     </ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content *ngIf="showForm" [fullscreen]="true">
+
+<ion-content [fullscreen]="true">
   <form  [formGroup]="formInfo" (ngSubmit)="validateForm()">
     <!-- Pseudo -->
     <div id="container">
@@ -52,35 +54,4 @@
       </div>
     </div>
   </form>
-
-  <!-- ======================== Partie Question ======================== -->
-</ion-content>
-
-<ion-content *ngIf="!showForm" [fullscreen]="true">
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Bienvenue {{user.pseudo | titlecase}}</ion-card-title>
-      <ion-card-subtitle>Niveau : {{user.level}}</ion-card-subtitle>
-    </ion-card-header>
-  
-    <ion-card-content>
-      <h3>Question 1</h3>
-      <h4>Zinédine ?</h4>
-      <ul>
-        <li>A : Ziboom</li>
-        <li>B : Zibram</li>
-        <li>C : Zidnae</li>
-        <li>D : Zidane</li>
-      </ul>
-      <div *ngIf="!ansmwerSubmitted">
-        <ion-button (click)="submitAnswer('Ziboom')" shape="round">Reponse A</ion-button>
-        <ion-button (click)="submitAnswer('Ziboom')" shape="round">Reponse B</ion-button>
-        <ion-button (click)="submitAnswer('Ziboom')" shape="round">Reponse C</ion-button>
-        <ion-button (click)="submitAnswer('Ziboom')" shape="round">Reponse D</ion-button>
-      </div>
-      <div>
-        <ion-button *ngIf="ansmwerSubmitted" shape="round">Question suivante</ion-button>
-      </div>
-    </ion-card-content>
-  </ion-card>
 </ion-content>

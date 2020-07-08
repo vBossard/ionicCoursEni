@@ -9,18 +9,19 @@ const routes: Routes = [
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
   },
   {
-    path: 'question',
-    component : QuestionComponent
-  },
-  {
-    path: 'score',
-    component : ScoreComponent
-  },
-  {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  {
+    path: 'question',
+    loadChildren: () => import('./question/question.module').then( m => m.QuestionPageModule)
+  },
+  {
+    path: 'score',
+    loadChildren: () => import('./score/score.module').then( m => m.ScorePageModule)
+  },
+
 ];
 
 @NgModule({

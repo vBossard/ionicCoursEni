@@ -1,3 +1,4 @@
+
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
@@ -5,13 +6,30 @@
     </ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content *ngIf="showForm" [fullscreen]="true">
+
+<ion-content [fullscreen]="true">
   <form  [formGroup]="formInfo" (ngSubmit)="validateForm()">
     <!-- Pseudo -->
     <div id="container">
       <div class="pseudo-div">
         <h3>Votre pseudo</h3>
         <ion-input formControlName="pseudo" placeholder="Entrer votre pseudo"></ion-input>
+      </div>
+      <!-- Selection de la catégorie -->
+      <div class="category-list">
+        <ion-list>
+          <ion-list-header>
+            <ion-label>
+              <h3>Choisissez la catégorie</h3>
+            </ion-label>
+          </ion-list-header>
+        
+          <ion-item>
+            <ion-select formControlName="category" multiple="false"  okText="Valider" cancelText="Annuler">
+              <ion-select-option *ngFor="let category of categoryList" [value]="category.id">{{category.name}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
       </div>
       <!-- Partie choix de la difficulté -->
       <div class="difficulty-list">
@@ -24,8 +42,21 @@
         
           <ion-item>
             <ion-select formControlName="difficulty" multiple="false"  okText="Valider" cancelText="Annuler">
-              <ion-select-option  *ngFor="let difficulty of difficultiesList">{{difficulty | titlecase }}</ion-select-option>
+              <ion-select-option *ngFor="let difficulty of difficultiesList">{{difficulty | titlecase }}</ion-select-option>
             </ion-select>
+          </ion-item>
+        </ion-list>
+      </div>
+      <!-- Nombre de question -->
+      <div class="question-quantity">
+        <ion-list>
+          <ion-list-header>
+            <ion-label>
+              <h3>Choisissez le nombre de questions</h3>
+            </ion-label>
+          </ion-list-header>
+          <ion-item>
+            <ion-input formControlName="questionQuantity" type="number"></ion-input>
           </ion-item>
         </ion-list>
       </div>
@@ -52,35 +83,4 @@
       </div>
     </div>
   </form>
-
-  <!-- ======================== Partie Question ======================== -->
-</ion-content>
-
-<ion-content *ngIf="!showForm" [fullscreen]="true">
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Bienvenue {{user.pseudo | titlecase}}</ion-card-title>
-      <ion-card-subtitle>Niveau : {{user.level}}</ion-card-subtitle>
-    </ion-card-header>
-  
-    <ion-card-content>
-      <h3>Question 1</h3>
-      <h4>Zinédine ?</h4>
-      <ul>
-        <li>A : Ziboom</li>
-        <li>B : Zibram</li>
-        <li>C : Zidnae</li>
-        <li>D : Zidane</li>
-      </ul>
-      <div *ngIf="!ansmwerSubmitted">
-        <ion-button (click)="submitAnswer('Ziboom')" shape="round">Reponse A</ion-button>
-        <ion-button (click)="submitAnswer('Ziboom')" shape="round">Reponse B</ion-button>
-        <ion-button (click)="submitAnswer('Ziboom')" shape="round">Reponse C</ion-button>
-        <ion-button (click)="submitAnswer('Ziboom')" shape="round">Reponse D</ion-button>
-      </div>
-      <div>
-        <ion-button *ngIf="ansmwerSubmitted" shape="round">Question suivante</ion-button>
-      </div>
-    </ion-card-content>
-  </ion-card>
 </ion-content>

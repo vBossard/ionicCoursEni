@@ -1,0 +1,33 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Open Trivia
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<!-- ======================== Partie Question ======================== -->
+
+ <ion-content *ngIf="!afficherScore" [fullscreen]="true">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Bienvenue {{user.pseudo}}</ion-card-title>
+      <ion-card-subtitle>Niveau : {{question.difficulty}}</ion-card-subtitle>
+      <ion-card-subtitle>Votre score : {{user.score}}</ion-card-subtitle>
+    </ion-card-header>
+  
+    <ion-card-content>
+      <h3>Question {{questionNumber}}</h3>
+      <h4 [innerHTML]="question.question"></h4>
+      
+      <div>
+        <ion-button [disabled]="disableAnswer" *ngFor="let reponse of listReponse" [color]="showAnswerColor ? reponse.color : 'primary' " expand="block" (click)="submitAnswer(reponse.texte)" shape="round">{{reponse.texte}}</ion-button>
+      </div>
+      
+      <div>
+        <ion-button *ngIf="ansmwerSubmitted" (click)="nextQuestion()"  shape="round">Question suivante</ion-button>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+

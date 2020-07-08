@@ -15,6 +15,22 @@
         <h3>Votre pseudo</h3>
         <ion-input formControlName="pseudo" placeholder="Entrer votre pseudo"></ion-input>
       </div>
+      <!-- Selection de la catégorie -->
+      <div class="category-list">
+        <ion-list>
+          <ion-list-header>
+            <ion-label>
+              <h3>Choisissez la catégorie</h3>
+            </ion-label>
+          </ion-list-header>
+        
+          <ion-item>
+            <ion-select formControlName="category" multiple="false"  okText="Valider" cancelText="Annuler">
+              <ion-select-option *ngFor="let category of categoryList" [value]="category.id">{{category.name}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+      </div>
       <!-- Partie choix de la difficulté -->
       <div class="difficulty-list">
         <ion-list>
@@ -26,8 +42,21 @@
         
           <ion-item>
             <ion-select formControlName="difficulty" multiple="false"  okText="Valider" cancelText="Annuler">
-              <ion-select-option  *ngFor="let difficulty of difficultiesList">{{difficulty | titlecase }}</ion-select-option>
+              <ion-select-option *ngFor="let difficulty of difficultiesList">{{difficulty | titlecase }}</ion-select-option>
             </ion-select>
+          </ion-item>
+        </ion-list>
+      </div>
+      <!-- Nombre de question -->
+      <div class="question-quantity">
+        <ion-list>
+          <ion-list-header>
+            <ion-label>
+              <h3>Choisissez le nombre de questions</h3>
+            </ion-label>
+          </ion-list-header>
+          <ion-item>
+            <ion-input formControlName="questionQuantity" type="number"></ion-input>
           </ion-item>
         </ion-list>
       </div>

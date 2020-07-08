@@ -1,6 +1,14 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Open Trivia
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
 <!-- ======================== Partie Question ======================== -->
-<h1>HELLOOOOO</h1>
- <ion-content [fullscreen]="true">
+
+ <ion-content *ngIf="!afficherScore" [fullscreen]="true">
   <ion-card>
     <ion-card-header>
       <ion-card-title>Bienvenue {{user.pseudo}}</ion-card-title>
@@ -9,7 +17,7 @@
     </ion-card-header>
   
     <ion-card-content>
-      <h3>Question 1</h3>
+      <h3>Question {{questionNumber}}</h3>
       <h4 [innerHTML]="question.question"></h4>
       
       <div>
@@ -21,4 +29,5 @@
       </div>
     </ion-card-content>
   </ion-card>
-</ion-content> 
+</ion-content>
+

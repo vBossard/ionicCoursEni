@@ -8,13 +8,14 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { CommonModule } from '@angular/common';
 import { QuestionComponent } from './question/question.component';
-
+import { ScoreComponent } from './score/score.component';
+import {HttpClientModule} from '@angular/common/http';
 
 
 @NgModule({
-  declarations: [AppComponent, QuestionComponent],
+  declarations: [AppComponent, QuestionComponent, ScoreComponent],
   entryComponents: [],
-  imports: [ CommonModule, BrowserModule, IonicModule.forRoot(), AppRoutingModule],
+  imports: [ CommonModule, BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule],
   providers: [
     StatusBar,
     SplashScreen,

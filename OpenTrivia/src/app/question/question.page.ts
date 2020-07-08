@@ -38,13 +38,15 @@ export class QuestionPage implements OnInit {
   }
   
   async getQuestionsAPI(questionQuantity,category,difficulty){
-    this.questionService.getQuestionFromAPI(questionQuantity,category,difficulty).then(
+    await this.questionService.getQuestionFromAPI(questionQuantity,category,difficulty).then(
      resolve => {
+       console.log("Liste des Questions")
        console.log(resolve)
        this.createQuestionArray(resolve)
      },
      reject => {
        console.log(reject)
+       
      }
    )
  }
@@ -55,7 +57,6 @@ export class QuestionPage implements OnInit {
    */
   createQuestionArray(questions){
     this.listQuestions = questions.results;
-    console.log(questions)
     this.getQuestion();
   }
 

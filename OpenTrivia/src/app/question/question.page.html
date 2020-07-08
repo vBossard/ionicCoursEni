@@ -21,7 +21,7 @@
       <h4 [innerHTML]="question.question"></h4>
       
       <div>
-        <ion-button [disabled]="disableAnswer" *ngFor="let reponse of listReponse" [color]="showAnswerColor ? reponse.color : 'primary' " expand="block" (click)="submitAnswer(reponse.texte)" shape="round">{{reponse.texte}}</ion-button>
+        <ion-button [disabled]="disableAnswer" *ngFor="let reponse of listReponse" [color]="showAnswerColor ? reponse.color : 'primary' " expand="block" (click)="submitAnswer(reponse.texte)" shape="round" [innerHTML]="reponse.texte"></ion-button>
       </div>
       
       <div>

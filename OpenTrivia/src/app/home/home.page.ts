@@ -75,7 +75,6 @@ export class HomePage implements OnInit {
   */
    validateForm(){
       if(this.formInfo.valid){
-        console.log(this.formInfo.value)
         this.user =this.formInfo.value;
         this.redirectToQuestion();
     }
@@ -87,7 +86,6 @@ export class HomePage implements OnInit {
   get errorControl(){
     return this.formInfo.controls;
   }
-
 
   /**
    * Redirige vers les questions
